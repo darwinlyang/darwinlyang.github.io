@@ -30,10 +30,10 @@ async function onScanClicked() {  // eslint-disable-line no-unused-vars
       }
     );
     const response = await request.show();
-    info("Payment success: " + response);
+    error("Unexpected payment success: " + response);
     await response.complete("success");
   } catch (err) {
-    error("Payment failed: " + err);
+    console.log("Payment failed: " + err);
     let errMsg = err.message;
     if (errMsg.includes('ERR_CONNECTION_REFUSED')) {
       info(`Port ${port} result: ERR_CONNECTION_REFUSED`);
