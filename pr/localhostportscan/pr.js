@@ -23,22 +23,22 @@ async function onScanClicked() {
       }
     );
     const response = await request.show();
-    error("Unexpected payment success: " + response);
+    error(`Unexpected payment success: ${response}`);
     await response.complete("success");
   } catch (err) {
     console.log("Payment failed: " + err);
     let errMsg = err.message;
     if (errMsg.includes('ERR_CONNECTION_REFUSED')) {
-      info(`Port ${port} result: ERR_CONNECTION_REFUSED`);
+      info(`Port ${port} CLOSED`);
     } else {
       if (errMsg.indexOf('HTTP header') !== -1) {
-        info(`Port ${port} result: ${errMsg}`);
+        info(`Port ${port} OPEN with result: ${errMsg}`);
       } else if (errMsg.indexOf('HTTP') !== -1) {
-        info(`Port ${port} result: ${errMsg.slice(errMsg.indexOf('HTTP'))}`);
+        info(`Port ${port} OPEN with result: ${errMsg.slice(errMsg.indexOf('HTTP'))}`);
       } else if (errMsg.indexOf('ERR_') !== -1) {
-        info(`Port ${port} result: ${errMsg.slice(errMsg.indexOf('ERR_'))}`);
+        info(`Port ${port} OPEN with result: ${errMsg.slice(errMsg.indexOf('ERR_'))}`);
       } else {
-        info(`Port ${port} result: ${errMsg}`);
+        info(`Port ${port} OPEN with result: ${errMsg}`);
       }
     }
 
