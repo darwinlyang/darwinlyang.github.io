@@ -1,11 +1,9 @@
-/* global done:false */
-/* global error:false */
-/* global PaymentRequest:false */
+/* exported onScanClicked */
 
 /**
- * Launches payment request for credit cards.
+ * Launches payment request to scan a localhost port.
  */
-async function onScanClicked() {  // eslint-disable-line no-unused-vars
+async function onScanClicked() {
   let port = document.getElementById("port").value;
   info(`Scanning port: ${port}`)
 
@@ -13,11 +11,6 @@ async function onScanClicked() {  // eslint-disable-line no-unused-vars
     error('PaymentRequest API is not supported.');
     return;
   }
-
-  var spinner = document.createElement('i');
-  spinner.classList = 'fa fa-refresh fa-spin';
-  var button = document.getElementById('scanButton');
-  button.appendChild(spinner);
 
   try {
     const request = new PaymentRequest(
@@ -49,7 +42,5 @@ async function onScanClicked() {  // eslint-disable-line no-unused-vars
       }
     }
 
-  } finally {
-    button.removeChild(spinner);
   }
 }
